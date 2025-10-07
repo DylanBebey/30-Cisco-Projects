@@ -47,7 +47,7 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 🎓 Étudiant en Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
 📍 Paris, France  
 🔗 [LinkedIn](https://www.linkedin.com/in/dylan-bebey)  
-📧 [ton.email@exemple.com](mailto:ton.email@exemple.com)
+📧 [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
 
 ---
 
