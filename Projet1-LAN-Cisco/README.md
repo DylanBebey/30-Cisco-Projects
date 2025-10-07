@@ -94,7 +94,7 @@ Projet1-LAN-Cisco/
 
 ---
 
-## 9️⃣ Étapes pratiques (avec explications et captures)
+## 9️⃣ Étapes pratiques
 
 ### 🔹 Étape 1 — Créer la topologie
 1. Ouvrir **Packet Tracer**.  
