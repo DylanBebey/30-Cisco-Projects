@@ -210,9 +210,13 @@ Projet2-VLAN-Securite/
 
 ---
 
+
 ## 🚀 Prochain projet
 
-Le **Projet 3** portera sur la **mise en place d’un serveur DHCP et DNS dynamique** sur Cisco Packet Tracer.
-Cette étape marquera le début de l’automatisation de l’adressage IP et de la gestion des services réseau.
+Le **Projet 3** portera sur le **routage inter-VLAN sur un routeur Cisco**.
+Cette étape me permettra de **comprendre en profondeur le fonctionnement du routage entre plusieurs réseaux VLAN**, d’utiliser un **routeur Cisco comme passerelle centralisée**, et de consolider mes bases en **protocoles de routage, sous-interfaces et communication inter-segments**.
+
+Ce projet marquera le passage au **niveau intermédiaire** du challenge, en reliant la **segmentation logique (VLANs)** vue précédemment à la **connectivité inter-réseaux sécurisée**.
+
 
 
