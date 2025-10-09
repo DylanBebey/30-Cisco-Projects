@@ -26,7 +26,7 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 | # | Nom du projet | Niveau | Lien |
 |---|----------------|---------|------|
 | 1 | LAN d’entreprise sous Cisco Packet Tracer | 🟢 Débutant | [Voir le projet](./Projet1-LAN-Cisco) |
-| 2 | Segmentation du réseau en VLANs sécurisés | 🟢 Débutant | *(à venir)* |
+| 2 | Segmentation du réseau en VLANs sécurisés | 🟢 Débutant | [Voir le projet](./Projet2-VLAN-Securite)  |
 | 3 | Routage inter-VLAN sur un routeur Cisco | 🟡 Intermédiaire | *(à venir)* |
 | 4 | Mise en place d’un serveur DHCP Cisco | 🟡 Intermédiaire | *(à venir)* |
 | 5 | DNS sur routeur Cisco + clients configurés | 🟡 Intermédiaire | *(à venir)* |
@@ -46,7 +46,7 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 **Dylan CHRIIST BEBEY NZEKE**  
 🎓 Étudiant en Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
 📍 Paris, France  
-🔗 [LinkedIn](https://www.linkedin.com/in/dylan-bebey)  
+🔗 [LinkedIn](https://www.linkedin.com/in/dylan-bebey-012886330/)  
 📧 [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
 
 ---
