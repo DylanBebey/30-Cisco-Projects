@@ -6,7 +6,6 @@ L’objectif est de **maîtriser Cisco Packet Tracer**, les **principes fondamen
 
 Chaque projet correspond à un cas concret rencontré dans le monde professionnel, et est documenté avec :
 - 🖼️ Captures d’écran
-- 📄 Rapports PDF
 - 💻 Fichiers Packet Tracer
 - 📘 Explications techniques
 - ⚙️ Commandes Cisco utilisées
