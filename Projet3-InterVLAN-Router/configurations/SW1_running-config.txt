@@ -1,0 +1,41 @@
+!
+version 15.0
+service timestamps debug datetime msec
+service timestamps log datetime msec
+hostname SW1
+!
+vlan 10
+ name Direction
+!
+vlan 20
+ name RH
+!
+vlan 30
+ name IT
+!
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+!
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 20
+!
+interface FastEthernet0/3
+ switchport mode access
+ switchport access vlan 30
+!
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+!
+ip default-gateway 192.168.10.1
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ login
+ transport input all
+!
+end
