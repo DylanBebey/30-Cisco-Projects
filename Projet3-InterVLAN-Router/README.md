@@ -220,5 +220,3 @@ Projet3-InterVLAN-Router/
 
 Le **Projet 4** portera sur la **mise en place d’un serveur DHCP Cisco**, afin d’automatiser la distribution d’adresses IP dans les différents VLANs.
 Cette étape marquera une **transition vers la gestion dynamique des adresses** et la simplification de l’administration réseau.
-
-Souhaites-tu maintenant que je te crée le **post LinkedIn** (dans le style du projet 2) pour annoncer officiellement ton **Projet 3** avec le lien GitHub ?
