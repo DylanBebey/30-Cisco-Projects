@@ -209,12 +209,12 @@ Projet3-InterVLAN-Router/
 
 ## 👤 Auteur
 
-**Nom :** Dylan CHRIIST BEBEY NZEKE
-🎓 **Formation :** Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)
-📍 **Localisation :** Paris, France
-📧 **Email :** [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
-🔗 **LinkedIn :** [www.linkedin.com/in/dylan-bebey-012886330](https://www.linkedin.com/in/dylan-bebey-012886330/)
-💻 **GitHub :** [github.com/DylanBebey](https://github.com/DylanBebey)
+Nom :** Dylan CHRIIST BEBEY NZEKE**
+🎓Formation : Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)
+📍 Localisation : Paris, France
+📧Email : [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
+🔗LinkedIn : [www.linkedin.com/in/dylan-bebey-012886330](https://www.linkedin.com/in/dylan-bebey-012886330/)
+💻GitHub : [github.com/DylanBebey](https://github.com/DylanBebey)
 
 ---
 
@@ -224,4 +224,3 @@ Le **Projet 4** portera sur la **mise en place d’un serveur DHCP Cisco**, afin
 Cette étape marquera une **transition vers la gestion dynamique des adresses** et la simplification de l’administration réseau.
 
 Souhaites-tu maintenant que je te crée le **post LinkedIn** (dans le style du projet 2) pour annoncer officiellement ton **Projet 3** avec le lien GitHub ?
-```
