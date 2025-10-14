@@ -69,7 +69,7 @@ Aucun changement physique n’a été nécessaire : les VLANs, trunks et sous-in
 Avant d’activer le DHCP, j’ai configuré chaque PC pour obtenir automatiquement son IP :
 > Onglet **Desktop → IP Configuration → DHCP**
 
-📸 *Capture :* [Direction_DHCP_Mode.jpg](./captures/PC_DHCP_Mode.jpg)  
+📸 *Capture :* [PC_DHCP_Mode.jpg](./captures/Direction_DHCP_Mode.jpg)  
 *Un poste configuré pour recevoir automatiquement une adresse.*
 
 ---
@@ -112,7 +112,7 @@ ip dhcp pool VLAN30
  exit
 ```
 
-📸 **Capture :** `Show_DHCP_Config_Complete.jpg`  
+📸 *Capture :*[Show_DHCP_Config_Complete.jpg](./captures/Show_DHCP_Config_Complete.jpg)  
 *Affichage de la configuration complète du DHCP sur le routeur.*
 
 ---
@@ -126,7 +126,7 @@ show ip dhcp binding
 show ip dhcp pool
 ```
 
-📸 **Capture :** `Show_DHCP_Binding.jpg`  
+📸 *Capture :*[Show_DHCP_Binding.jpg](./captures/Show_DHCP_Binding.jpg)   
 *Liste des adresses IP attribuées automatiquement aux postes.*
 
 ---
@@ -142,9 +142,9 @@ Chaque PC a automatiquement reçu une adresse IP correspondant à son VLAN :
 | IT | 192.168.30.11 | 192.168.30.1 | 8.8.8.8 |
 
 📸 **Captures :**
-- `PC_Direction_IP_DHCP.jpg`  
-- `PC_RH_IP_DHCP.jpg`  
-- `PC_IT_IP_DHCP.jpg`
+- [PC_Direction_IP_DHCP.jpg](./captures/PC_Direction_IP_DHCP.jpg)   
+- [PC_RH_IP_DHCP.jpg](./captures/PC_RH_IP_DHCP.jpg)   
+- [PC_IT_IP_DHCP.jpg](./captures/PC_IT_IP_DHCP.jpg) 
 
 ---
 
@@ -161,8 +161,8 @@ ping 192.168.30.10
 ```
 
 📸 **Captures :**
-- `Ping_OK_DHCP.jpg` → Ping entre VLANs autorisés  
-- `Ping_Blocked_DHCP.jpg` → RH vers IT bloqué (ACL toujours efficace)
+- [Ping_OK_DHCP.jpg](./captures/Ping_OK_DHCP.jpg)  → Ping entre VLANs autorisés  
+- [Ping_Blocked_DHCP.jpg](./captures/Ping_Blocked_DHCP.jpg) → RH vers IT bloqué (ACL toujours efficace)
 
 ---
 
