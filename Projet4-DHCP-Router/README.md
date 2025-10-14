@@ -69,7 +69,7 @@ Aucun changement physique n’a été nécessaire : les VLANs, trunks et sous-in
 Avant d’activer le DHCP, j’ai configuré chaque PC pour obtenir automatiquement son IP :
 > Onglet **Desktop → IP Configuration → DHCP**
 
-📸 **Capture :** `PC_DHCP_Mode.jpg`  
+📸 *Capture :* [PC_DHCP_Mode.jpg](./captures/PC_DHCP_Mode.jpg)  
 *Un poste configuré pour recevoir automatiquement une adresse.*
 
 ---
