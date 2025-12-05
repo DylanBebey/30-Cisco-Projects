@@ -213,12 +213,12 @@ Projet5-DNS-Web/
 
 ---
 
-## 9. Auteur
 
-**Dylan CHRIIST BEBEY NZEKE**
-Bachelor 3 – Cybersécurité & Réseaux (ECE Paris)
-Paris, France
-GitHub : [https://github.com/DylanBebey](https://github.com/DylanBebey)
-LinkedIn : [https://linkedin.com/in/dylan-bebey-012886330](https://linkedin.com/in/dylan-bebey-012886330)
+## 👤 Auteur
+**Dylan CHRIIST BEBEY NZEKE**  
+Étudiant en Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
+Paris, France  
+[LinkedIn](https://www.linkedin.com/in/dylan-bebey-012886330/)  
+[dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
 
 ---
