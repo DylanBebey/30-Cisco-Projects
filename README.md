@@ -28,7 +28,7 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 | 2 | Segmentation du réseau en VLANs sécurisés | 🟢 Débutant | [Voir le projet](./Projet2-VLAN-Securite)  |
 | 3 | Routage inter-VLAN sur un routeur Cisco | 🟡 Intermédiaire | [Voir le projet](./Projet3-InterVLAN-Router) |
 | 4 | Mise en place d’un serveur DHCP Cisco | 🟡 Intermédiaire | [Voir le projet](./Projet4-DHCP-Router) |
-| 5 | DNS sur routeur Cisco + clients configurés | 🟡 Intermédiaire | *(à venir)* |
+| 5 | DNS sur routeur Cisco + clients configurés | 🟡 Intermédiaire | [Voir le projet](./Projet5-DNS-Web) |
 | … | … | … | … |
 
 ---
