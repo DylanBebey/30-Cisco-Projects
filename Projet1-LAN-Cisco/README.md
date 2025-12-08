@@ -1,71 +1,76 @@
-# 🌐 Projet 1 — LAN d’entreprise sous Cisco Packet Tracer  
-_Status : Terminé ✅ • Dossier : `Projet1-LAN-Cisco/` • Fichier PT : `lan_base.pkt`_
+# Projet 1 — LAN d’entreprise sous Cisco Packet Tracer
+
+*Status : Terminé • Dossier : `Projet1-LAN-Cisco/` • Fichier PT : `lan_base.pkt`*
 
 ---
 
-## 1️⃣ Introduction
-Ce projet inaugure mon **30 Cisco Projects Challenge**, un parcours personnel que j’ai lancé pour renforcer mes compétences en **réseaux Cisco** et en **cybersécurité**.  
-L’objectif de ce premier projet est de construire un **réseau local (LAN)** d’entreprise minimaliste mais fonctionnel, avec **adressage IP statique**, **connectivité validée**, et **documentation complète**.
+## 1. Introduction
+
+Ce projet inaugure mon **30 Cisco Projects Challenge**, un parcours personnel que j’ai lancé pour renforcer mes compétences en **réseaux Cisco** et en **cybersécurité**.
+L’objectif de ce premier projet est de construire un **réseau local (LAN)** d’entreprise minimaliste mais fonctionnel, avec **adressage IP statique**, **connectivité validée** et **documentation complète**.
 
 ---
 
-## 2️⃣ Objectifs
-- Créer une **topologie LAN** (3 postes + 1 switch).
-- Configurer les **adresses IP statiques** de chaque poste.
-- Tester la **connectivité ICMP (ping)** entre les hôtes.
-- Vérifier la **table MAC** du switch.
-- Documenter le tout avec **captures, rapport et explications.**
+## 2. Objectifs
+
+* Créer une **topologie LAN** (3 postes + 1 switch).
+* Configurer les **adresses IP statiques** de chaque poste.
+* Tester la **connectivité ICMP (ping)** entre les hôtes.
+* Vérifier la **table MAC** du switch.
+* Documenter entièrement le projet.
 
 ---
 
-## 3️⃣ Pourquoi ce projet est important
+## 3. Pourquoi ce projet est important
+
 Ce premier projet pose les **bases fondamentales** du métier d’administrateur réseau :
-- Comprendre la **couche 2 (Switching)** et la communication **MAC/IP**.
-- Maîtriser les outils de diagnostic comme le **ping** et la **table MAC**.
-- Apprendre à **documenter un projet technique** comme en entreprise.  
-C’est également une **première brique essentielle en cybersécurité**, car on ne peut pas sécuriser ce qu’on ne comprend pas.
+
+* Comprendre la **couche 2 (switching)**.
+* Manipuler les outils de diagnostic : **ping**, **MAC table**, **statuts d’interface**.
+* Apprendre à **documenter un projet technique**, comme en entreprise.
+
+Ce projet constitue également une **première brique essentielle en cybersécurité**, puisqu’on ne peut pas sécuriser un réseau que l’on ne maîtrise pas techniquement.
 
 ---
 
-## 4️⃣ Topologie & Plan d’adressage
+## 4. Topologie & Plan d’adressage
 
 ```
-
 PC1 (Poste_RH)  ─┐
 PC2 (Poste_IT)  ──┤── Switch Cisco 2960
 PC3 (Poste_DIR) ─┘
-
 ```
 
-| Hôte | Nom | Adresse IP | Masque | Passerelle |
-|------|-----|-------------|---------|-------------|
-| PC1 | Poste_RH | 192.168.10.1 | 255.255.255.0 | (vide) |
-| PC2 | Poste_IT | 192.168.10.2 | 255.255.255.0 | (vide) |
-| PC3 | Poste_DIR | 192.168.10.3 | 255.255.255.0 | (vide) |
-| Switch | Switch_LAN | — | — | — |
+| Hôte   | Nom        | Adresse IP   | Masque        | Passerelle |
+| ------ | ---------- | ------------ | ------------- | ---------- |
+| PC1    | Poste_RH   | 192.168.10.1 | 255.255.255.0 | —          |
+| PC2    | Poste_IT   | 192.168.10.2 | 255.255.255.0 | —          |
+| PC3    | Poste_DIR  | 192.168.10.3 | 255.255.255.0 | —          |
+| Switch | Switch_LAN | —            | —             | —          |
 
-> 🔹 Pas de passerelle ici : un seul réseau sans routage.
-
----
-
-## 5️⃣ Prérequis
-- Notions : IP/mask, ping, interface PC/switch.
-- Savoir manipuler les équipements dans **Cisco Packet Tracer**.
+Aucune passerelle n’est nécessaire : il s’agit d’un **LAN simple sans routage**.
 
 ---
 
-## 6️⃣ Outils utilisés
-- **Cisco Packet Tracer** 8.2+
-- **Switch Cisco 2960**
-- **3 PC**
-- Système d’exploitation hôte : Windows / Linux
+## 5. Prérequis
+
+* Connaître les bases : adressage IP, masque, ping.
+* Savoir manipuler les équipements dans **Cisco Packet Tracer**.
 
 ---
 
-## 7️⃣ Organisation du dépôt
+## 6. Outils utilisés
+
+* Cisco Packet Tracer 8.2+
+* Switch Cisco 2960
+* 3 PC utilisateurs
+* Poste Windows / Linux
+
+---
+
+## 7. Organisation du dépôt
 
 ```
-
 Projet1-LAN-Cisco/
 ├── captures/
 │   ├── topologie_lan.png
@@ -82,193 +87,157 @@ Projet1-LAN-Cisco/
 │   └── rapport_projet1.pdf
 ├── lan_base.pkt
 └── README.md
-
 ```
 
 ---
 
-## 8️⃣ Définitions rapides
-- **LAN (Local Area Network)** : réseau local, limité à un bâtiment ou service.  
-- **Switch (couche 2)** : relie les hôtes selon leurs adresses **MAC**.  
-- **ICMP / ping** : protocole permettant de tester la communication entre machines.
+## 8. Définitions rapides
+
+* **LAN** : réseau local, limité géographiquement.
+* **Switch (couche 2)** : appareil qui apprend les **MAC** et relie les hôtes.
+* **ICMP / ping** : permet de tester la communication entre équipements.
 
 ---
 
-## 9️⃣ Étapes pratiques
+## 9. Étapes pratiques
 
-### 🔹 Étape 1 — Créer la topologie
-1. Ouvrir **Packet Tracer**.  
-2. Ajouter 3 **PC** (End Devices → PC).  
-3. Ajouter 1 **Switch 2960**.  
-4. Relier chaque PC au switch avec un **câble droit (Copper Straight-Through)**.  
-   - PC1 (Fa0) → Switch (Fa0/1)  
-   - PC2 (Fa0) → Switch (Fa0/2)  
-   - PC3 (Fa0) → Switch (Fa0/3)
+### Étape 1 — Créer la topologie
+
+1. Ajouter 3 PC.
+2. Ajouter un switch 2960.
+3. Relier chaque PC au switch via câble **droit (straight-through)** :
+
+   * PC1 → Fa0/1
+   * PC2 → Fa0/2
+   * PC3 → Fa0/3
 
 📸 Capture : `captures/topologie_lan.png`
 
 ---
 
-### 🔹 Étape 2 — Renommer les hôtes
-- PC1 → **Poste_RH**
-- PC2 → **Poste_IT**
-- PC3 → **Poste_DIR**
-- Switch → **Switch_LAN**
+### Étape 2 — Renommer les hôtes
+
+* PC1 → Poste_RH
+* PC2 → Poste_IT
+* PC3 → Poste_DIR
+* Switch → Switch_LAN
 
 ---
 
-### 🔹 Étape 3 — Configurer les adresses IP
-Onglet **Desktop → IP Configuration** sur chaque PC :
+### Étape 3 — Configurer les adresses IP
 
-| PC | IP | Masque | Passerelle |
-|----|----|---------|------------|
-| PC1 | 192.168.10.1 | 255.255.255.0 | — |
-| PC2 | 192.168.10.2 | 255.255.255.0 | — |
-| PC3 | 192.168.10.3 | 255.255.255.0 | — |
+Depuis chaque PC : **Desktop → IP Configuration**
 
-📸 Captures :  
-- `ip_pc1.png`, `ip_pc2.png`, `ip_pc3.png`
+| PC  | IP           | Masque        | Passerelle |
+| --- | ------------ | ------------- | ---------- |
+| PC1 | 192.168.10.1 | 255.255.255.0 | —          |
+| PC2 | 192.168.10.2 | 255.255.255.0 | —          |
+| PC3 | 192.168.10.3 | 255.255.255.0 | —          |
+
+📸 Captures :
+`ip_pc1.png`, `ip_pc2.png`, `ip_pc3.png`
 
 ---
 
-### 🔹 Étape 4 — Vérifier les liens
-CLI du Switch :
+### Étape 4 — Vérifier les liens
+
 ```
-
 Switch> enable
 Switch# show interfaces status
-
 ```
-📸 Capture : `captures/show_interfaces.png`
+
+📸 `captures/show_interfaces.png`
 
 ---
 
-### 🔹 Étape 5 — Tester la connectivité
-Depuis **PC1** :
-```
+### Étape 5 — Tester la connectivité
 
+Depuis PC1 :
+
+```
 ping 192.168.10.2
 ping 192.168.10.3
-
-```
-Depuis **PC2** :
 ```
 
+Depuis PC2 :
+
+```
 ping 192.168.10.3
-
 ```
 
-📸 Captures :  
-- `ping_pc1_pc2.png`  
-- `ping_pc2_pc3.png`
+📸 Captures :
+`ping_pc1_pc2.png`, `ping_pc2_pc3.png`
 
 ---
 
-### 🔹 Étape 6 — Vérifier la table MAC
-CLI du switch :
+### Étape 6 — Vérifier la table MAC
+
 ```
-
 Switch# show mac address-table
-
 ```
 
 📸 Capture : `captures/mac_table.png`
 
 ---
 
-## 🔍 Étape 7 — Sauvegarde
-**File → Save As →** `lan_base.pkt`
+## 10. Tests de validation
+
+* IP correctement attribuées
+* Interfaces actives
+* Ping OK dans les trois sens
+* 3 entrées MAC apprises
 
 ---
 
-## 10️⃣ Tests de validation
-- [x] IPs uniques et cohérentes (/24)  
-- [x] Liens “connected” (vert)  
-- [x] Ping OK dans tous les sens  
-- [x] 3 MAC apprises par le switch  
+## 11. Dépannage
+
+### Ping échoué ?
+
+* Vérifier les câbles.
+* Vérifier les IP.
+* Attendre quelques secondes après le branchement.
+
+### Table MAC vide ?
+
+* Lancer un ping : la table se remplit automatiquement.
 
 ---
 
-## 11️⃣ Dépannage
-**Ping échoué ?**
-- Vérifie les câbles (verts).  
-- Attends quelques secondes après branchement.  
-- Vérifie les IP/mask.
+## 12. Livrables
 
-**Table MAC vide ?**
-- Relance un ping : la table se remplit dynamiquement.
-
----
-
-## 12️⃣ Livrables
-| Type | Fichier / Dossier |
-|------|--------------------|
-| Packet Tracer | `lan_base.pkt` |
-| Captures | `captures/*.png` |
-| Rapport PDF | `docs/rapport_projet1.pdf` |
-| Notes Cisco | `configurations/notes_cisco.txt` |
+| Type          | Fichier / Dossier                |
+| ------------- | -------------------------------- |
+| Packet Tracer | `lan_base.pkt`                   |
+| Captures      | `captures/*.png`                 |
+| Rapport PDF   | `docs/rapport_projet1.pdf`       |
+| Notes Cisco   | `configurations/notes_cisco.txt` |
 
 ---
 
-## 13️⃣ Commandes utilisées
+## 13. Commandes utilisées
+
 ```
-
 Switch> enable
 Switch# show interfaces status
 Switch# show mac address-table
-
 ```
 
 ---
 
-## 14️⃣ Résultats attendus
-- **Ping réussi** :  
-  `Reply from 192.168.10.2: bytes=32 time<1ms TTL=128`
-- **Table MAC** : 3 entrées dynamiques (`Fa0/1`, `Fa0/2`, `Fa0/3`)
+## 14. Résultats attendus
+
+* Pings réussis
+* Apprentissage MAC correct du switch
 
 ---
 
-## 15️⃣ Publication sur GitHub
-1. Créer le dossier `Projet1-LAN-Cisco/` dans ton dépôt principal `30-Cisco-Projects/`.
-2. Ajouter :
-   - Ce `README.md`
-   - Le fichier `lan_base.pkt`
-   - Les dossiers `captures/`, `docs/`, `configurations/`
-3. Commit :  
-   **"Projet 1 – LAN de base : topologie, IP, pings, captures, rapport."**
+## 👤 Auteur
 
----
-
-## 16️⃣ Modèle de rapport PDF
-Structure recommandée :
-1. Objectif du projet  
-2. Schéma de la topologie  
-3. Table IP  
-4. Étapes & commandes  
-5. Résultats des tests  
-6. Difficultés rencontrées & solutions  
-7. Conclusion & transition vers le Projet 2 (VLANs)
-
----
-
-## 17️⃣ Auteur
-👤 **Nom :** Dylan CHRIIST BEBEY NZEKE  
-🎓 **Formation :** Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
-📍 **Localisation :** Paris, France  
-📧 **Email :** [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)  
-🔗 **LinkedIn :** [www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)  
-💻 **GitHub :** [github.com/DylanBebey](https://github.com/DylanBebey)
-
----
-
-## 18️⃣ Licence
-📜 MIT License — libre de réutilisation avec mention de l’auteur.
-
----
-
-## 19️⃣ Changelog
-| Version | Date | Description |
-|----------|------|--------------|
-| v1.0 | Octobre 2025 | Première version stable (topologie, IP, ping, doc complète) |
+**Dylan Chriist BEBEY NZEKE**
+Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)
+Paris, France
+Email : [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
+LinkedIn : [https://www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)
+GitHub : [https://github.com/DylanBebey](https://github.com/DylanBebey)
 
 ---
