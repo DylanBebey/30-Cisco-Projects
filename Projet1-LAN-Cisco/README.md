@@ -83,8 +83,6 @@ Projet1-LAN-Cisco/
 │   └── mac_table.png
 ├── configurations/
 │   └── notes_cisco.txt
-├── docs/
-│   └── rapport_projet1.pdf
 ├── lan_base.pkt
 └── README.md
 ```
@@ -208,9 +206,9 @@ Switch# show mac address-table
 | Type          | Fichier / Dossier                |
 | ------------- | -------------------------------- |
 | Packet Tracer | `lan_base.pkt`                   |
-| Captures      | `captures/*.png`                 |
-| Rapport PDF   | `docs/rapport_projet1.pdf`       |
+| Captures      | `ip_pc1.png`,`ip_pc2.png`,`ip_pc3.png`,`ping_pc1_pc2.png`,`ping_pc1_pc3.png`,`show_interfaces.png`,`mac_table.png`                 |
 | Notes Cisco   | `configurations/notes_cisco.txt` |
+
 
 ---
 
