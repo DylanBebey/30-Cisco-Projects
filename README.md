@@ -1,19 +1,19 @@
 # 🚀 30 Cisco Projects Challenge
 
-## 🧩 Description
+## 1. Description
 Ce dépôt regroupe les **30 projets Cisco** que je réalise dans le cadre de mon **“Cisco Projects Challenge”**.  
 L’objectif est de **maîtriser Cisco Packet Tracer**, les **principes fondamentaux du réseau**, et de me préparer à devenir un **expert en cybersécurité**.
 
 Chaque projet correspond à un cas concret rencontré dans le monde professionnel, et est documenté avec :
-- 🖼️ Captures d’écran
-- 💻 Fichiers Packet Tracer
-- 📘 Explications techniques
-- ⚙️ Commandes Cisco utilisées
+- Captures d’écran
+- Fichiers Packet Tracer
+- Explications techniques
+- Commandes Cisco utilisées
 
 ---
 
-## 🧠 Objectif du challenge
-🎯 Développer mes compétences en :
+## 2. Objectif du challenge
+Développer mes compétences en :
 - Administration réseau (Cisco)
 - Routage, VLANs, DHCP, DNS, NAT
 - Sécurité et segmentation du réseau
@@ -21,7 +21,7 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 
 ---
 
-## 🗂️ Liste des projets
+## 3. Liste des projets
 | # | Nom du projet | Niveau | Lien |
 |----|----------------------------------------------------------------------------|-------------------|------|
 | 1  | LAN d’entreprise sous Cisco Packet Tracer                                  | 🟢 Débutant       | [Voir le projet](./Projet1-LAN-Cisco) |
@@ -30,7 +30,7 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 | 4  | Mise en place d’un serveur DHCP Cisco                                      | 🟡 Intermédiaire  | [Voir le projet](./Projet4-DHCP-Router) |
 | 5  | DNS + hébergement du site intranet sur un serveur Cisco                    | 🟡 Intermédiaire  | [Voir le projet](./Projet5-DNS-Web) |
 | 6  | Sécurisation du switch : Port Security & Storm Control                     | 🟠 Avancé         | [Voir le projet](./Projet6-PortSecurity) |
-| 7  | Sécurisation du routeur : ACL avancées & firewall Cisco                    | 🟠 Avancé         | *(à venir)* |
+| 7  | Sécurisation du routeur : ACL avancées & firewall Cisco                    | 🟠 Avancé         | [Voir le projet](./Projet7-SSH-ACL) |
 | 8  | DHCP centralisé + Relay Agent (ip helper-address)                          | 🟠 Avancé         | *(à venir)* |
 | 9  | Topologie redondante : HSRP + VLANs + bascule automatique                  | 🔴 Expert         | *(à venir)* |
 | 10 | Routage dynamique OSPF dans un réseau d’entreprise                         | 🔴 Expert         | *(à venir)* |
@@ -57,11 +57,18 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 
 ---
 
-## 🧰 Outils utilisés
+## 4. Outils utilisés
 - Cisco Packet Tracer 8.2  
 - Routeurs & Switches Cisco (2960, 2901, etc.)  
 - Wireshark (pour les analyses de paquets)  
 - GitHub (documentation et partage)
+
+---
+
+## 5. Suivi du challenge
+- Chaque semaine, un nouveau projet sera ajouté.  
+- Tous les fichiers et rapports sont publiés ici.  
+- Retrouvez les explications détaillées sur mon profil **LinkedIn**.
 
 ---
 
@@ -71,13 +78,6 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 📍 Paris, France  
 🔗 [LinkedIn](https://www.linkedin.com/in/dylan-bebey-012886330/)  
 📧 [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
-
----
-
-## 🌟 Suivi du challenge
-➡️ Chaque semaine, un nouveau projet sera ajouté.  
-➡️ Tous les fichiers et rapports sont publiés ici.  
-➡️ Retrouvez les explications détaillées sur mon profil **LinkedIn**.
 
 ---
 
