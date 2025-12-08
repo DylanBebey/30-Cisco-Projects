@@ -29,7 +29,7 @@ Chaque projet correspond à un cas concret rencontré dans le monde professionne
 | 3  | Routage inter-VLAN sur un routeur Cisco                                    | 🟡 Intermédiaire  | [Voir le projet](./Projet3-InterVLAN-Router) |
 | 4  | Mise en place d’un serveur DHCP Cisco                                      | 🟡 Intermédiaire  | [Voir le projet](./Projet4-DHCP-Router) |
 | 5  | DNS + hébergement du site intranet sur un serveur Cisco                    | 🟡 Intermédiaire  | [Voir le projet](./Projet5-DNS-Web) |
-| 6  | Sécurisation du switch : Port Security & Storm Control                     | 🟠 Avancé         | *(à venir)* |
+| 6  | Sécurisation du switch : Port Security & Storm Control                     | 🟠 Avancé         | [Voir le projet](./Projet6-PortSecurity) |
 | 7  | Sécurisation du routeur : ACL avancées & firewall Cisco                    | 🟠 Avancé         | *(à venir)* |
 | 8  | DHCP centralisé + Relay Agent (ip helper-address)                          | 🟠 Avancé         | *(à venir)* |
 | 9  | Topologie redondante : HSRP + VLANs + bascule automatique                  | 🔴 Expert         | *(à venir)* |
