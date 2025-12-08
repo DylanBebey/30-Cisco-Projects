@@ -210,13 +210,13 @@ Projet2-VLAN-Securite/
 
 ---
 
-## Auteur
+## 👤 Auteur
 
-👤 **Dylan CHRIIST BEBEY NZEKE**
-Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)
-Paris, France
-[dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
-LinkedIn : [https://www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)
-GitHub : [https://github.com/DylanBebey](https://github.com/DylanBebey)
+**Nom et Prénom :** Dylan Chriist BEBEY NZEKE  
+**Formation :** Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
+**Localisation :** Paris, France  
+**Email :** [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)  
+**LinkedIn :** [www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)  
+**GitHub :** [github.com/DylanBebey](https://github.com/DylanBebey)
 
 ---
