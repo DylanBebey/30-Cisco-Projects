@@ -1,37 +1,38 @@
+# Projet 3 – Routage inter-VLAN sur routeur Cisco (Router-on-a-Stick)
 
-# 🧱 Projet 3 – Routage inter-VLAN sur routeur Cisco (Router-on-a-Stick)
+## Description
 
-## 🧩 Description
-
-Ce projet s’inscrit dans le cadre de mon **challenge “30 Cisco Projects”**.  
-Il représente la **suite logique du Projet 2**, où j’avais déjà mis en place la segmentation réseau avec les VLANs et une ACL de sécurité.  
+Ce projet s’inscrit dans le cadre de mon **challenge “30 Cisco Projects”**.
+Il représente la **suite logique du Projet 2**, où j’avais déjà mis en place la segmentation réseau avec les VLANs et une ACL de sécurité.
 Ici, l’objectif est de **formaliser et approfondir le routage inter-VLAN** afin de comprendre **comment un routeur Cisco assure la communication entre plusieurs VLANs** dans un réseau d’entreprise.
 
 Ce projet m’a permis de consolider mes connaissances sur le **Router-on-a-Stick**, les **sous-interfaces**, l’**encapsulation 802.1Q**, et la **logique de routage entre sous-réseaux**.
 
 ---
 
-## 🧠 Objectifs du projet
+## Objectifs du projet
 
-- Démontrer le fonctionnement du **routage inter-VLAN** sur un routeur Cisco.  
-- Vérifier la **communication entre VLANs** via des pings croisés.  
-- Comprendre l’importance du **trunk 802.1Q** et du rôle de chaque **sous-interface**.  
-- Observer les **tables de routage et d’interfaces** sur le routeur.  
-- Confirmer l’efficacité de l’**ACL du Projet 2** bloquant RH → IT.  
-- Produire une documentation complète et claire (captures + analyse).
+* Démontrer le fonctionnement du **routage inter-VLAN** sur un routeur Cisco.
+* Vérifier la **communication entre VLANs** via des pings croisés.
+* Comprendre l’importance du **trunk 802.1Q** et du rôle de chaque **sous-interface**.
+* Observer les **tables de routage et d’interfaces** sur le routeur.
+* Confirmer l’efficacité de l’**ACL du Projet 2** bloquant RH → IT.
+* Produire une documentation complète et claire (captures + analyse).
 
 ---
 
-## 🧭 Topologie réseau
+## Topologie réseau
 
 ### Architecture
 
 Le réseau utilisé ici est identique à celui du Projet 2 :
-- 🖥️ **3 PC** représentant les services : Direction, RH et IT  
-- 🧩 **1 Switch Cisco 2960**  
-- 🌐 **1 Routeur Cisco 2911**
+
+* **3 PC** représentant les services : Direction, RH et IT
+* **1 Switch Cisco 2960**
+* **1 Routeur Cisco 2911**
 
 ### Schéma logique
+
 ![Schéma logique](./captures/Schema_Logique.jpg)
 
 ---
@@ -39,27 +40,26 @@ Le réseau utilisé ici est identique à celui du Projet 2 :
 ### Plan d’adressage
 
 | VLAN | Département | Réseau /24      | Passerelle   | IP Exemple    |
-| ---- | ------------ | --------------- | ------------ | ------------- |
-| 10   | Direction    | 192.168.10.0/24 | 192.168.10.1 | 192.168.10.10 |
-| 20   | RH           | 192.168.20.0/24 | 192.168.20.1 | 192.168.20.10 |
-| 30   | IT           | 192.168.30.0/24 | 192.168.30.1 | 192.168.30.10 |
+| ---- | ----------- | --------------- | ------------ | ------------- |
+| 10   | Direction   | 192.168.10.0/24 | 192.168.10.1 | 192.168.10.10 |
+| 20   | RH          | 192.168.20.0/24 | 192.168.20.1 | 192.168.20.10 |
+| 30   | IT          | 192.168.30.0/24 | 192.168.30.1 | 192.168.30.10 |
 
 ---
 
-## ⚙️ Étapes de configuration
+## Étapes de configuration
 
-### 1️⃣ Vérification des VLANs existants
-J’ai confirmé la présence des trois VLANs créés lors du Projet 2 :
+### 1. Vérification des VLANs existants
 
 ```bash
 Switch# show vlan brief
-````
+```
 
 📸 *Capture :* [ShowVLAN_Brief.jpg](./captures/ShowVLAN_Brief.jpg)
 
 ---
 
-### 2️⃣ Vérification du trunk entre le switch et le routeur
+### 2. Vérification du trunk entre le switch et le routeur
 
 Le port **GigabitEthernet0/1** est bien en mode **trunk** et transporte les VLANs 10, 20 et 30.
 
@@ -71,51 +71,45 @@ Switch# show interfaces trunk
 
 ---
 
-### 3️⃣ Configuration du routeur (Router-on-a-Stick)
+### 3. Configuration du routeur (Router-on-a-Stick)
 
-Le routeur **Router1** a été configuré avec trois **sous-interfaces** :
-
-* G0/0.10 → VLAN 10
-* G0/0.20 → VLAN 20
-* G0/0.30 → VLAN 30
-
-Chaque sous-interface utilise l’encapsulation **dot1Q** correspondant à son VLAN.
+Le routeur **Router1** a été configuré avec trois **sous-interfaces**, une pour chaque VLAN.
 
 ```bash
-Router(config)# interface g0/0.10
-Router(config-subif)# encapsulation dot1Q 10
-Router(config-subif)# ip address 192.168.10.1 255.255.255.0
-Router(config)# interface g0/0.20
-Router(config-subif)# encapsulation dot1Q 20
-Router(config-subif)# ip address 192.168.20.1 255.255.255.0
-Router(config)# interface g0/0.30
-Router(config-subif)# encapsulation dot1Q 30
-Router(config-subif)# ip address 192.168.30.1 255.255.255.0
+interface g0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+!
+interface g0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+!
+interface g0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.0
 ```
 
 ---
 
-### 4️⃣ Vérification des interfaces et du routage
-
-Pour s’assurer du bon fonctionnement :
+### 4. Vérification des interfaces et du routage
 
 ```bash
 Router# show ip interface brief
 Router# show ip route
 ```
 
-📸 *Captures :*
+📸 Captures :
 
 * [ShowIPInterfaceBrief_R1.jpg](./captures/ShowIPInterfaceBrief_R1.jpg)
 * [ShowIPRoute_R1.jpg](./captures/ShowIPRoute_R1.jpg)
 
-On observe que les interfaces G0/0.10, .20 et .30 sont **UP/UP**, et les routes locales sont bien enregistrées.
+Les sous-interfaces sont **UP/UP**, et les routes sont bien enregistrées.
 
 ---
 
-### 5️⃣ Vérification de l’ACL (héritée du Projet 2)
+### 5. Vérification de l’ACL héritée du Projet 2
 
-J’ai conservé l’ACL permettant de **bloquer le VLAN RH (20)** vers **le VLAN IT (30)** :
+Cette ACL bloque le VLAN RH (20) vers le VLAN IT (30).
 
 ```bash
 Router# show access-lists
@@ -123,69 +117,51 @@ Router# show access-lists
 
 📸 *Capture :* [ShowAccessLists.jpg](./captures/ShowAccessLists.jpg)
 
-Cette ACL empêche tout trafic du sous-réseau 192.168.20.0/24 vers 192.168.30.0/24.
-
 ---
 
-### 6️⃣ Tests de connectivité
+### 6. Tests de connectivité
 
-#### ✅ Ping depuis **Direction** vers **RH** et **IT**
+#### Ping depuis Direction → RH et IT
 
-Les pings passent sans problème :
+Les communications fonctionnent.
+
 📸 *Capture :* [Ping_Direction_to_RH_IT.jpg](./captures/Ping_Direction_to_RH_IT.jpg)
 
-#### 🚫 Ping depuis **RH** vers **IT**
+#### Ping depuis RH → IT
 
-Le trafic est bien bloqué par l’ACL :
+Bloqué grâce à l’ACL.
+
 📸 *Capture :* [Ping_RH_to_IT_blocked_if_ACL.jpg](./captures/Ping_RH_to_IT_blocked_if_ACL.jpg)
 
 ---
 
-## 🧩 Analyse du fonctionnement
+## Analyse du fonctionnement
 
-Ce projet m’a permis d’observer **en détail la logique du Router-on-a-Stick** :
+Ce projet m’a permis d’observer en détail le fonctionnement du **Router-on-a-Stick** :
 
-* Chaque VLAN est un **sous-réseau distinct**, isolé sur le switch.
-* Le **trunk 802.1Q** transporte toutes les trames VLAN jusqu’au routeur.
-* Le routeur agit comme une **passerelle commune** entre les VLANs via ses sous-interfaces.
-* Les **tables de routage** montrent bien les sous-réseaux connectés directement.
-* Enfin, l’ACL prouve qu’il est possible d’appliquer une **politique de sécurité sélective** même dans un routage inter-VLAN.
-
----
-
-## ⚠️ Difficultés rencontrées
-
-Durant ce projet, j’ai eu à surmonter plusieurs points :
-
-* ❌ **Trunk non fonctionnel** : j’avais oublié de définir les VLANs autorisés.
-* ⚙️ **ACL mal appliquée** (sens “out” au lieu de “in”), ce qui bloquait tout le trafic.
-* 🧩 **Sous-interface inactive** à cause d’un `no shutdown` oublié sur l’interface physique G0/0.
-
-Ces erreurs m’ont aidé à mieux comprendre **le cheminement des paquets** et la **logique d’encapsulation dot1Q** entre le switch et le routeur.
+* Chaque VLAN correspond à un **sous-réseau distinct**.
+* Le trunk 802.1Q **transporte les trames VLAN tagguées** vers le routeur.
+* Le routeur agit comme **passerelle inter-VLAN** via ses sous-interfaces.
+* Les **tables de routage** montrent bien les réseaux directement connectés.
+* L’ACL du Projet 2 démontre qu’il est possible de contrôler précisément les communications.
 
 ---
 
-## ✅ Résultats finaux
+## Difficultés rencontrées
 
-* Les VLANs 10, 20 et 30 communiquent via le routeur.
-* Le **routage inter-VLAN est pleinement opérationnel**.
-* L’**ACL** protège efficacement le VLAN IT contre les accès non autorisés.
-* Toutes les configurations ont été sauvegardées et vérifiées.
+* **Trunk mal configuré** : les VLANs n’étaient pas autorisés, empêchant le routage.
+* **ACL appliquée au mauvais endroit** : en sortie au lieu de “in”, ce qui la rendait inefficace.
+* **Sous-interface inactive** : `no shutdown` manquant sur l'interface physique G0/0.
 
----
+Ces erreurs m’ont permis de mieux comprendre :
 
-## 🧠 Compétences acquises
-
-* Compréhension complète du **Router-on-a-Stick**
-* Configuration d’un **routage inter-VLAN** sur Cisco 2911
-* Analyse du **trunk 802.1Q** et du **tag VLAN**
-* Utilisation des **commandes de diagnostic** (show, ping)
-* Dépannage et correction d’erreurs de routage
-* Rédaction technique professionnelle
+* les mécanismes de l’encapsulation dot1Q,
+* la logique du Router-on-a-Stick,
+* la manière dont un routeur gère plusieurs sous-réseaux simultanés.
 
 ---
 
-## 🗂️ Structure du projet
+## Structure du projet
 
 ```
 Projet3-InterVLAN-Router/
@@ -208,15 +184,11 @@ Projet3-InterVLAN-Router/
 ---
 
 ## 👤 Auteur
-**Dylan CHRIIST BEBEY NZEKE**  
-🎓 Étudiant en Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
-📍 Paris, France  
-🔗 [LinkedIn](https://www.linkedin.com/in/dylan-bebey-012886330/)  
-📧 [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
+
+**Dylan CHRIIST BEBEY NZEKE**
+Étudiant en Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)
+Paris, France
+[LinkedIn](https://www.linkedin.com/in/dylan-bebey-012886330/)
+[dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
 
 ---
-
-## 🚀 Prochain projet
-
-Le **Projet 4** portera sur la **mise en place d’un serveur DHCP Cisco**, afin d’automatiser la distribution d’adresses IP dans les différents VLANs.
-Cette étape marquera une **transition vers la gestion dynamique des adresses** et la simplification de l’administration réseau.
