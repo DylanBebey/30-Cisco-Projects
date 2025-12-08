@@ -1,51 +1,56 @@
-# 🧱 Projet 2 – Segmentation du réseau et sécurisation avec VLANs & ACLs
+# Projet 2 – Segmentation du réseau et sécurisation avec VLANs & ACLs
 
-## 🧩 Description
+## Description
 
 Ce projet fait partie de mon **challenge “30 Cisco Projects”**.
-Il consiste à concevoir un **réseau d’entreprise segmenté** avec des **VLANs** et à le **sécuriser avec des ACLs (Access Control Lists)** afin de maîtriser les bases de la **sécurité réseau sur Cisco Packet Tracer**.
+Il consiste à concevoir un **réseau d’entreprise segmenté** avec des **VLANs**, puis à le **sécuriser grâce à des ACLs (Access Control Lists)** afin de maîtriser les bases de la **sécurité réseau sur Cisco Packet Tracer**.
 
 L’objectif principal était d’apprendre à :
 
 * Créer et gérer plusieurs VLANs (Direction, RH, IT)
 * Configurer le **routage inter-VLAN (Router-on-a-Stick)**
-* Mettre en place des **règles ACLs** pour restreindre les communications
-* Tester et vérifier la connectivité entre les différents segments du réseau
+* Mettre en place des **ACLs** pour restreindre la communication entre certains VLANs
+* Tester et valider l’ensemble de la connectivité
 
 ---
 
-## 🧠 Contexte et motivation
+## Contexte et motivation
 
-Avant de parler cybersécurité, il faut **comprendre le réseau** et savoir **le segmenter**.
-Ce projet m’a permis de simuler un **réseau d’entreprise réaliste**, où chaque département est isolé et protégé, tout en conservant une communication maîtrisée.
-J’ai utilisé **Cisco Packet Tracer** pour représenter cette architecture de manière concrète.
+Avant d’aborder des sujets avancés en cybersécurité, il est essentiel de comprendre la **segmentation réseau** et son lien direct avec la sécurité.
 
-Ce projet m’a aussi sensibilisé à l’importance des **règles d’accès** et à la logique des **trames VLAN (802.1Q)** dans un environnement Cisco.
+Ce projet m’a permis de :
 
----
+* simuler un **réseau d’entreprise réaliste**,
+* isoler logiquement les départements,
+* contrôler précisément les flux autorisés,
+* appliquer des politiques de sécurité claires via des ACLs.
 
-## ⚙️ Objectifs techniques
-
-* Création de **3 VLANs** (Direction, RH, IT)
-* Attribution des ports VLAN aux hôtes correspondants
-* Configuration d’un **trunk 802.1Q** entre le switch et le routeur
-* Mise en place d’un **routage inter-VLAN** via un *Router-on-a-Stick*
-* Application d’une **ACL de sécurité** bloquant le VLAN RH vers le VLAN IT
-* Vérification de la **connectivité et du filtrage**
+Il m’a également permis de mieux comprendre la logique des trames **802.1Q**, utilisée dans la gestion des VLANs sur Cisco.
 
 ---
 
-## 🧭 Topologie réseau
+## Objectifs techniques
 
-### Architecture :
+* Création de **3 VLANs** (Direction – 10, RH – 20, IT – 30)
+* Affectation des ports aux VLANs correspondants
+* Mise en place d’un **lien trunk 802.1Q** switch → routeur
+* Configuration du **router-on-a-stick**
+* Application d’une ACL pour bloquer les communications RH → IT
+* Vérification de la configuration et des filtrages
 
-* 🖥️ **3 postes clients** (1 par service)
-* 🧩 **1 switch Cisco 2960**
-* 🌐 **1 routeur Cisco 2911**
+---
 
-### Plan d’adressage :
+## Topologie réseau
 
-| VLAN | Département | Réseau /24      | Passerelle   | IP Exemple    |
+### Architecture utilisée
+
+* 3 postes clients (Direction, RH, IT)
+* 1 switch Cisco 2960
+* 1 routeur Cisco 2911
+
+### Plan d’adressage
+
+| VLAN | Département | Réseau          | Passerelle   | Exemple IP    |
 | ---- | ----------- | --------------- | ------------ | ------------- |
 | 10   | Direction   | 192.168.10.0/24 | 192.168.10.1 | 192.168.10.10 |
 | 20   | RH          | 192.168.20.0/24 | 192.168.20.1 | 192.168.20.10 |
@@ -53,11 +58,9 @@ Ce projet m’a aussi sensibilisé à l’importance des **règles d’accès** 
 
 ---
 
-## 🔧 Étapes de configuration
+## Étapes de configuration
 
-### 1️⃣ Création des VLANs
-
-J’ai créé trois VLANs pour séparer logiquement les services de l’entreprise :
+### 1. Création des VLANs
 
 ```bash
 Switch(config)# vlan 10
@@ -70,9 +73,7 @@ Switch(config-vlan)# name IT
 
 ---
 
-### 2️⃣ Affectation des ports aux VLANs
-
-Chaque PC a été assigné à son VLAN respectif :
+### 2. Affectation des ports
 
 ```bash
 Switch(config)# interface fa0/1
@@ -80,11 +81,11 @@ Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan 10
 ```
 
+Même opération pour RH et IT, en adaptant l’interface.
+
 ---
 
-### 3️⃣ Configuration du trunk vers le routeur
-
-Ce lien transporte les trames de tous les VLANs :
+### 3. Configuration du trunk
 
 ```bash
 Switch(config)# interface g0/1
@@ -94,9 +95,7 @@ Switch(config-if)# switchport trunk allowed vlan 10,20,30
 
 ---
 
-### 4️⃣ Routage inter-VLAN (Router-on-a-Stick)
-
-Le routeur a été configuré avec une sous-interface par VLAN :
+### 4. Routage inter-VLAN
 
 ```bash
 Router(config)# interface g0/0.10
@@ -104,87 +103,99 @@ Router(config-subif)# encapsulation dot1Q 10
 Router(config-subif)# ip address 192.168.10.1 255.255.255.0
 ```
 
+Répété pour les VLANs 20 et 30.
+
 ---
 
-### 5️⃣ Configuration IP des clients
-
-Chaque poste a reçu une IP statique correspondant à son VLAN :
+### 5. Configuration IP des clients
 
 ```text
-Direction : 192.168.10.10 / 255.255.255.0
-RH         : 192.168.20.10 / 255.255.255.0
-IT         : 192.168.30.10 / 255.255.255.0
+Direction : 192.168.10.10
+RH        : 192.168.20.10
+IT        : 192.168.30.10
 ```
 
 ---
 
-### 6️⃣ Application d’une ACL de sécurité
+### 6. ACL de sécurité
 
-L’objectif : bloquer le VLAN RH (20) vers le VLAN IT (30) tout en laissant les autres flux ouverts.
+Objectif : empêcher RH d’accéder au VLAN IT.
 
 ```bash
-Router(config)# access-list 100 deny ip 192.168.20.0 0.0.0.255 192.168.30.0 0.0.0.255
-Router(config)# access-list 100 permit ip any any
-Router(config)# interface g0/0.20
-Router(config-if)# ip access-group 100 in
+access-list 100 deny ip 192.168.20.0 0.0.0.255 192.168.30.0 0.0.0.255
+access-list 100 permit ip any any
+interface g0/0.20
+ip access-group 100 in
 ```
 
 ---
 
-### 7️⃣ Vérification et tests
+### 7. Vérifications
 
-Commandes utilisées pour valider la configuration :
+Commandes utilisées :
 
 ```bash
 show vlan brief
 show ip interface brief
 show access-lists
-ping 192.168.30.10
 ```
 
-Les tests de ping ont confirmé :
+Tests réalisés :
 
-* ✅ RH ne peut plus atteindre IT (filtrage ACL réussi)
-* ✅ Direction communique avec RH et IT (routage fonctionnel)
-
----
-
-## ⚠️ Difficultés rencontrées
-
-J’ai rencontré plusieurs problèmes intéressants pendant la configuration :
-
-* ❌ **ACL non fonctionnelle au début** : j’avais appliqué la règle “out” au lieu de “in”. J’ai appris que le bon sens d’application dépend du flux à contrôler.
-* ⚙️ **Lien trunk mal configuré** : oubli de préciser les VLANs autorisés, ce qui empêchait le trafic entre VLANs.
-* 🧩 **Masque IP incorrect** sur un poste : les tests de ping échouaient à cause d’une erreur de /24 mal saisie.
-
-Ces erreurs m’ont forcé à **analyser méthodiquement** chaque couche du modèle OSI pour comprendre où le problème se situait.
-C’est ce qui rend ce projet formateur : on apprend plus en corrigeant ses erreurs qu’en suivant une simple recette.
+* RH → IT : refusé
+* Direction → tous : autorisé
+* IT → RH : autorisé
 
 ---
 
-## 🔍 Résultats obtenus
+## Difficultés rencontrées
 
-* ✅ Routage inter-VLAN opérationnel
-* ✅ ACL parfaitement fonctionnelle
-* ✅ Réseau segmenté et sécurisé
-* ✅ Configuration sauvegardée et documentée
+### 1. ACL appliquée au mauvais endroit
 
-Ce projet m’a aidé à **comprendre concrètement la logique des VLANs, ACLs et du Router-on-a-Stick** — des compétences de base en ingénierie réseau et cybersécurité.
+Initialement appliquée en sortie (`out`), l’ACL ne fonctionnait pas.
+J’ai corrigé en l’appliquant **en entrée** sur la sous-interface du VLAN 20.
+
+### 2. Problème de trunk
+
+Le trunk était configuré mais les VLANs n’étaient pas autorisés → trafic bloqué.
+Après ajout de la ligne :
+
+```bash
+switchport trunk allowed vlan 10,20,30
+```
+
+les VLANs sont passés correctement.
+
+### 3. Mauvais masque sur un PC
+
+Un client utilisait un masque erroné (255.255.0.0).
+Une fois corrigé, les pings inter-VLAN fonctionnaient.
+
+Ces erreurs m’ont obligé à analyser couche par couche (modèle OSI), ce qui m’a permis de mieux comprendre le fonctionnement global du réseau.
 
 ---
 
-## 🧠 Compétences acquises
+## Résultats obtenus
 
-* Création et gestion de VLANs
-* Configuration de trunks 802.1Q
+* Routage inter-VLAN parfaitement fonctionnel
+* ACL bloquant RH → IT comme prévu
+* Réseau segmenté et sécurisé
+* Documentation complète
+
+---
+
+## Compétences développées
+
+* Gestion avancée des VLANs
+* Mise en place de trunk 802.1Q
 * Routage inter-VLAN
-* Gestion des ACLs Cisco
-* Diagnostic et dépannage réseau
-* Documentation technique claire et professionnelle
+* Conception d’ACL Cisco
+* Analyse et diagnostic réseau
+* Rédaction technique
 
 ---
 
-## 🗂️ Organisation du projet
+## Organisation du projet
 
 ```
 Projet2-VLAN-Securite/
@@ -199,24 +210,13 @@ Projet2-VLAN-Securite/
 
 ---
 
-
 ## Auteur
-👤 **Nom :** Dylan CHRIIST BEBEY NZEKE  
-🎓 **Formation :** Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
-📍 **Localisation :** Paris, France  
-📧 **Email :** [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)  
-🔗 **LinkedIn :** [www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)  
-💻 **GitHub :** [github.com/DylanBebey](https://github.com/DylanBebey)
+
+👤 **Dylan CHRIIST BEBEY NZEKE**
+Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)
+Paris, France
+[dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)
+LinkedIn : [https://www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)
+GitHub : [https://github.com/DylanBebey](https://github.com/DylanBebey)
 
 ---
-
-
-## 🚀 Prochain projet
-
-Le **Projet 3** portera sur le **routage inter-VLAN sur un routeur Cisco**.
-Cette étape me permettra de **comprendre en profondeur le fonctionnement du routage entre plusieurs réseaux VLAN**, d’utiliser un **routeur Cisco comme passerelle centralisée**, et de consolider mes bases en **protocoles de routage, sous-interfaces et communication inter-segments**.
-
-Ce projet marquera le passage au **niveau intermédiaire** du challenge, en reliant la **segmentation logique (VLANs)** vue précédemment à la **connectivité inter-réseaux sécurisée**.
-
-
-
