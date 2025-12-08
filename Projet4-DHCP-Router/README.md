@@ -1,87 +1,83 @@
-# 🌐 Projet 4 – Serveur DHCP sur routeur Cisco (Router DHCP)
+# Projet 4 – Serveur DHCP sur routeur Cisco (Router DHCP)
 
-## 🧩 Description
+## Description
 
-Ce projet fait partie de mon **challenge “30 Cisco Projects”**.  
+Ce projet fait partie de mon **challenge “30 Cisco Projects”**.
 Après avoir segmenté le réseau avec des **VLANs** et activé le **routage inter-VLAN** (Projet 3), j’ai voulu automatiser l’attribution des adresses IP à l’aide d’un **serveur DHCP intégré au routeur Cisco**.
 
-L’objectif de ce projet était de permettre à **chaque VLAN** d’obtenir automatiquement une **adresse IP, une passerelle et un DNS**, sans configuration manuelle.  
-C’est une étape essentielle pour comprendre comment un **réseau d’entreprise moderne** distribue dynamiquement les adresses tout en conservant la segmentation et la sécurité.
+L’objectif était de permettre à chaque VLAN d’obtenir automatiquement une **adresse IP, une passerelle et un DNS**, sans aucune configuration manuelle.
+C’est une étape essentielle pour comprendre comment un réseau d’entreprise moderne distribue dynamiquement les adresses tout en conservant la segmentation et la sécurité.
 
 ---
 
-## 🧠 Contexte et motivation
+## Contexte et motivation
 
-Lors des projets précédents, chaque PC nécessitait une configuration IP manuelle.  
-Cela devient vite **long et source d’erreurs** dans un réseau d’entreprise.  
+Dans les projets précédents, chaque poste nécessitait une configuration IP manuelle.
+Ce processus est long, répétitif et source d’erreurs lorsqu’on commence à avoir plusieurs dizaines de machines.
 
-J’ai donc décidé d’intégrer un **serveur DHCP** sur le **routeur Cisco 2911**, afin de :
-- Simplifier la configuration des postes,
-- Automatiser la gestion des adresses IP,
-- Comprendre le fonctionnement des **pools DHCP** et des **adresses exclues** sur Cisco IOS.
+J’ai donc décidé d’exploiter le **DHCP intégré au routeur Cisco 2911** afin de :
 
-Ce projet m’a permis de rendre mon réseau **plus intelligent, évolutif et professionnel**.
+* Simplifier la configuration des hôtes,
+* Automatiser la gestion des sous-réseaux,
+* Comprendre en profondeur le fonctionnement des **pools DHCP** et des adresses exclues sur Cisco IOS.
 
----
-
-## ⚙️ Objectifs techniques
-
-- Configuration d’un **serveur DHCP intégré** au routeur Cisco  
-- Création de **pools DHCP distincts** pour chaque VLAN (Direction, RH, IT)  
-- Exclusion d’adresses utilisées par les passerelles et serveurs  
-- Attribution automatique d’adresses IP aux hôtes des VLANs  
-- Vérification du fonctionnement via les commandes *show* et les tests *ping*
+Ce projet rend mon infrastructure **plus professionnelle, scalable et facile à administrer**.
 
 ---
 
-## 🧭 Topologie réseau
+## Objectifs techniques
 
-### Architecture :
-
-* 🖥️ **3 postes clients** (Direction, RH, IT)  
-* 🧩 **1 switch Cisco 2960**  
-* 🌐 **1 routeur Cisco 2911** (jouant aussi le rôle de serveur DHCP)
-
-### Plan d’adressage :
-
-| VLAN | Département | Réseau /24      | Passerelle   | Plage DHCP Distribuée   |
-| ---- | ------------ | --------------- | ------------- | ----------------------- |
-| 10   | Direction    | 192.168.10.0/24 | 192.168.10.1 | 192.168.10.11 → .254    |
-| 20   | RH           | 192.168.20.0/24 | 192.168.20.1 | 192.168.20.11 → .254    |
-| 30   | IT           | 192.168.30.0/24 | 192.168.30.1 | 192.168.30.11 → .254    |
+* Mettre en place un **serveur DHCP intégré** au routeur Cisco
+* Créer des **pools DHCP distincts** pour les VLANs Direction, RH et IT
+* Réserver et exclure les adresses critiques (passerelles, serveurs)
+* Permettre aux hôtes de recevoir automatiquement leur configuration réseau
+* Vérifier la cohérence du fonctionnement à l’aide des commandes de diagnostic
 
 ---
 
-## 🔧 Étapes de configuration
+## Topologie réseau
 
-### 1️⃣ Préparation du réseau
+### Architecture utilisée
 
-J’ai **réutilisé la même topologie** que celle du Projet 3 (avec routage inter-VLAN et ACL déjà en place).  
-Aucun changement physique n’a été nécessaire : les VLANs, trunks et sous-interfaces existaient déjà.
+* 3 postes utilisateurs (Direction, RH, IT)
+* 1 switch Cisco 2960
+* 1 routeur Cisco 2911 (faisant aussi office de serveur DHCP)
 
-📸 **Capture :** `Schema_DHCP_Before.jpg`  
-*Topologie de base avant la mise en place du DHCP.*
+### Plan d’adressage
 
----
-
-### 2️⃣ Suppression des IP statiques sur les postes
-
-Avant d’activer le DHCP, j’ai configuré chaque PC pour obtenir automatiquement son IP :
-> Onglet **Desktop → IP Configuration → DHCP**
-
-📸 *Capture :* [PC_DHCP_Mode.jpg](./captures/Direction_DHCP_Mode.jpg)  
-*Un poste configuré pour recevoir automatiquement une adresse.*
+| VLAN | Département | Réseau /24      | Passerelle   | Plage DHCP distribuée |
+| ---- | ----------- | --------------- | ------------ | --------------------- |
+| 10   | Direction   | 192.168.10.0/24 | 192.168.10.1 | 192.168.10.11 → .254  |
+| 20   | RH          | 192.168.20.0/24 | 192.168.20.1 | 192.168.20.11 → .254  |
+| 30   | IT          | 192.168.30.0/24 | 192.168.30.1 | 192.168.30.11 → .254  |
 
 ---
 
-### 3️⃣ Configuration du serveur DHCP sur le routeur
+## Étapes de configuration
 
-J’ai configuré un **pool DHCP par VLAN** sur le routeur Cisco :
+### 1. Préparation du réseau
+
+J’ai réutilisé exactement la même topologie que celle du Projet 3 :
+les VLANs, sous-interfaces et trunks étaient déjà opérationnels.
+
+📸 *Schema_DHCP_Before.jpg*
+
+---
+
+### 2. Passage des PC en mode DHCP
+
+Dans chaque poste :
+**Desktop → IP Configuration → DHCP**
+
+Les anciennes adresses statiques ont été remplacées automatiquement.
+
+📸 *PC_DHCP_Mode.jpg*
+
+---
+
+### 3. Configuration du serveur DHCP sur le routeur
 
 ```bash
-Router> enable
-Router# configure terminal
-
 ! Exclusion des adresses réservées
 ip dhcp excluded-address 192.168.10.1 192.168.10.10
 ip dhcp excluded-address 192.168.20.1 192.168.20.10
@@ -93,7 +89,6 @@ ip dhcp pool VLAN10
  default-router 192.168.10.1
  dns-server 8.8.8.8
  domain-name direction.local
- exit
 
 ! VLAN 20 - RH
 ip dhcp pool VLAN20
@@ -101,7 +96,6 @@ ip dhcp pool VLAN20
  default-router 192.168.20.1
  dns-server 8.8.8.8
  domain-name rh.local
- exit
 
 ! VLAN 30 - IT
 ip dhcp pool VLAN30
@@ -109,140 +103,111 @@ ip dhcp pool VLAN30
  default-router 192.168.30.1
  dns-server 8.8.8.8
  domain-name it.local
- exit
 ```
 
-📸 *Capture :*[Show_DHCP_Config_Complete.jpg](./captures/Show_DHCP_Config_Complete.jpg)  
-*Affichage de la configuration complète du DHCP sur le routeur.*
+📸 *Show_DHCP_Config_Complete.jpg*
 
 ---
 
-### 4️⃣ Vérification du DHCP actif
+### 4. Vérification du fonctionnement du DHCP
 
-Pour vérifier le bon fonctionnement du service :
+Commandes utilisées :
 
 ```bash
 show ip dhcp binding
 show ip dhcp pool
 ```
 
-📸 *Capture :*[Show_DHCP_Binding.jpg](./captures/Show_DHCP_Binding.jpg)   
-*Liste des adresses IP attribuées automatiquement aux postes.*
+📸 *Show_DHCP_Binding.jpg*
+
+Ces commandes m’ont permis de vérifier que :
+
+* chaque pool DHCP était actif,
+* les PC recevaient bien une IP correspondante à leur VLAN.
 
 ---
 
-### 5️⃣ Vérification sur les clients
+### 5. Vérification sur les clients
 
-Chaque PC a automatiquement reçu une adresse IP correspondant à son VLAN :
+| Poste     | Adresse obtenue | Passerelle   | DNS     |
+| --------- | --------------- | ------------ | ------- |
+| Direction | 192.168.10.11   | 192.168.10.1 | 8.8.8.8 |
+| RH        | 192.168.20.11   | 192.168.20.1 | 8.8.8.8 |
+| IT        | 192.168.30.11   | 192.168.30.1 | 8.8.8.8 |
 
-| Poste | Adresse obtenue | Passerelle | DNS       |
-| ------ | ---------------- | ----------- | ---------- |
-| Direction | 192.168.10.11 | 192.168.10.1 | 8.8.8.8 |
-| RH | 192.168.20.11 | 192.168.20.1 | 8.8.8.8 |
-| IT | 192.168.30.11 | 192.168.30.1 | 8.8.8.8 |
+📸
 
-📸 **Captures :**
-- [PC_Direction_IP_DHCP.jpg](./captures/PC_Direction_IP_DHCP.jpg)   
-- [PC_RH_IP_DHCP.jpg](./captures/PC_RH_IP_DHCP.jpg)   
-- [PC_IT_IP_DHCP.jpg](./captures/PC_IT_IP_DHCP.jpg) 
-
----
-
-### 6️⃣ Tests de connectivité
-
-Enfin, j’ai effectué plusieurs tests **ping inter-VLAN** pour m’assurer que :
-- Le **routage inter-VLAN** fonctionne,
-- Le **DHCP** attribue bien des IP valides,
-- Et que **l’ACL du projet 3** (RH → IT bloqué) est toujours active.
-
-```bash
-ping 192.168.20.10
-ping 192.168.30.10
-```
-
-📸 **Captures :**
-- [Ping_OK_DHCP.jpg](./captures/Ping_OK_DHCP.jpg)  → Ping entre VLANs autorisés  
-- [Ping_Blocked_DHCP.jpg](./captures/Ping_Blocked_DHCP.jpg) → RH vers IT bloqué (ACL toujours efficace)
+* PC_Direction_IP_DHCP.jpg
+* PC_RH_IP_DHCP.jpg
+* PC_IT_IP_DHCP.jpg
 
 ---
 
-## ⚠️ Difficultés rencontrées
+### 6. Tests de connectivité
 
-J’ai rencontré plusieurs obstacles intéressants :
+J’ai effectué différents tests pour valider :
 
-- ❌ **Erreur de pool DHCP** : oubli du masque `/24` → distribution d’adresses incorrecte  
-- ⚙️ **Adresses exclues non prises en compte** : faute de frappe corrigée  
-- 🧩 **Client ne recevait pas d’adresse** : oubli de mettre l’interface en *no shutdown*  
+* la bonne attribution des IP,
+* le fonctionnement du routage inter-VLAN,
+* la persistance de l’ACL du projet 3 (RH → IT bloqué).
 
-Ces erreurs m’ont appris à utiliser :
+📸
+
+* Ping_OK_DHCP.jpg
+* Ping_Blocked_DHCP.jpg
+
+---
+
+## Difficultés rencontrées
+
+* **Masque incorrect dans un pool DHCP**
+  Un simple oubli du `/24` provoquait une distribution erronée des adresses.
+
+* **Erreur dans les adresses exclues**
+  J’avais mal tapé une adresse, ce qui rendait une passerelle assignable par le DHCP.
+
+* **Un PC ne recevait rien**
+  L’interface côté routeur était encore en `shutdown`.
+  Après l’avoir réactivée, tout est rentré dans l’ordre.
+
+Ces erreurs m’ont poussé à utiliser systématiquement :
+
 ```bash
 show ip dhcp binding
 show running-config
 ```
-pour diagnostiquer efficacement un problème DHCP.
+
+afin de vérifier l’état réel du routeur.
 
 ---
 
-## 🔍 Résultats obtenus
+## Résultats obtenus
 
-* ✅ Distribution automatique des adresses IP par VLAN  
-* ✅ Routage inter-VLAN opérationnel  
-* ✅ ACL toujours fonctionnelle  
-* ✅ Topologie stable, fonctionnelle et entièrement automatisée  
-
-Grâce à ce projet, j’ai compris comment un routeur Cisco peut jouer le rôle d’un **serveur DHCP centralisé** dans un réseau d’entreprise.
-
----
-
-## 🧠 Compétences acquises
-
-- Configuration d’un **serveur DHCP intégré sur routeur Cisco**
-- Création de **pools DHCP** par VLAN
-- Exclusion d’adresses réservées
-- Diagnostic et dépannage DHCP (`show ip dhcp binding`)
-- Maintien d’une **architecture inter-VLAN dynamique et sécurisée**
+* Attribution automatique des adresses IP pour chaque VLAN.
+* Infrastructure DHCP centralisée fonctionnant parfaitement.
+* Routage inter-VLAN intact.
+* ACL du Projet 3 toujours opérationnelle.
+* Réseau désormais géré de manière **professionnelle et automatisée**.
 
 ---
 
-## 🗂️ Organisation du projet
+## Compétences acquises
 
-```
-Projet4-DHCP-Router/
-├── captures/
-│   ├── Schema_DHCP_Before.jpg
-│   ├── PC_DHCP_Mode.jpg
-│   ├── Show_DHCP_Config_Complete.jpg
-│   ├── Show_DHCP_Binding.jpg
-│   ├── PC_Direction_IP_DHCP.jpg
-│   ├── PC_RH_IP_DHCP.jpg
-│   ├── PC_IT_IP_DHCP.jpg
-│   ├── Ping_OK_DHCP.jpg
-│   └── Ping_Blocked_DHCP.jpg
-├── configurations/
-│   └── R1_DHCP_Running_Config.txt
-├── projet4_dhcp_router.pkt
-└── README.md
-```
+* Création et gestion de pools DHCP Cisco
+* Exclusion d’adresses réservées
+* Vérification et dépannage du DHCP
+* Analyse du trafic inter-VLAN dans un environnement segmenté
+* Construction d’une architecture réseau cohérente et évolutive
 
 ---
 
 ## 👤 Auteur
 
-**Nom :** Dylan CHRIIST BEBEY NZEKE  
-🎓 **Formation :** Bachelor 3 – Cybersécurité & Réseaux (ECE Paris)  
-📍 **Localisation :** Paris, France  
-📧 **Email :** [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)  
-🔗 **LinkedIn :** [www.linkedin.com/in/dylan-bebey-012886330](https://www.linkedin.com/in/dylan-bebey-012886330/)  
-💻 **GitHub :** [github.com/DylanBebey](https://github.com/DylanBebey)
-
----
-
-## 🚀 Prochain projet
-
-Le **Projet 5** portera sur la **configuration d’un serveur DNS et Web sur Cisco Packet Tracer**.  
-L’objectif sera d’approfondir la logique des services réseaux d’entreprise :  
-associer des noms de domaines à des IPs internes, héberger un site web simulé et intégrer ces services à mon infrastructure DHCP.
-
-Ce projet marquera la transition vers la **couche applicative du modèle OSI**, après la maîtrise des couches réseau et transport.
+**Nom et Prénom :** Dylan Chriist BEBEY NZEKE  
+**Formation :** Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
+**Localisation :** Paris, France  
+**Email :** [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)  
+**LinkedIn :** [www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)  
+**GitHub :** [github.com/DylanBebey](https://github.com/DylanBebey)
 
 ---
