@@ -220,7 +220,7 @@ Projet5-DNS-Web/
 **Formation :** Bachelor 3 – Administration d’infrastructure sécurisée (ECE Paris)  
 **Localisation :** Paris, France  
 **Email :** [dylanchriist@gmail.com](mailto:dylanchriist@gmail.com)  
-**LinkedIn :** [www.linkedin.com/in/dylan-bebey-012886330/](https://www.linkedin.com/in/dylan-bebey-012886330/)  
+**LinkedIn :** [linkedin.com/in/dylan-chriist-bebey-nzeke-012886330/](https://www.linkedin.com/in/dylan-chriist-bebey-nzeke-012886330/) 
 **GitHub :** [github.com/DylanBebey](https://github.com/DylanBebey)
 
 ---
